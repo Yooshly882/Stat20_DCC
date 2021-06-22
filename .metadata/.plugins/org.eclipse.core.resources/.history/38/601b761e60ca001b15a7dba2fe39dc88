@@ -1,0 +1,104 @@
+import java.io.File;
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class GUI extends Application {
+	Character character = new Character();
+
+	@Override
+	public void start (Stage primaryStage) throws Exception {
+		openScreen(primaryStage);
+	}
+
+	private void openScreen(Stage primaryStage) {
+		TextField tfPlayerName = new TextField();
+		TextField tfCharacterName = new TextField();
+		HBox hbPlayerName = new HBox(29, new Label ("Player Name"), tfPlayerName);
+		HBox hbCharacterName = new HBox(10, new Label ("Character Name"), tfCharacterName);
+		HBox hbNames = new HBox(20, hbPlayerName, hbCharacterName);
+
+		RadioButton rbMale = new RadioButton("Male");
+		rbMale.setUserData("Male");
+		RadioButton rbFemale = new RadioButton("Female");
+		rbFemale.setUserData("Female");
+		ToggleGroup genderGroup = new ToggleGroup();
+		rbMale.setToggleGroup(genderGroup);
+		rbFemale.setToggleGroup(genderGroup);
+		VBox vbGender = new VBox(10, new Label("Gender"), rbMale, rbFemale);
+
+		VBox allBoxes = new VBox(20, hbNames, vbGender);
+		/*
+		Slider law = new Slider(0, 2, 1);
+		law.setSnapToTicks(true);
+		law.setShowTickMarks(true);
+		law.setMajorTickUnit(4);
+		HBox hbLaw = new HBox(new Label("Lawful"), law, new Label("Chaotic"));
+		HBox hbGenderAndLaw = new HBox(10, vbGender, hbLaw);
+
+		VBox vbPersDetails = new VBox(10, hbNames, hbGenderAndLaw);
+		vbPersDetails.setAlignment(Pos.TOP_CENTER);
+		vbPersDetails.setPadding(new Insets(20));
+
+		ComboBox<String> cbOccupation = new ComboBox<String>();
+		cbOccupation.getItems().addAll("occ1", "occ2", "occ3", "occ4");
+		cbOccupation.setVisibleRowCount(4);
+
+		GridPane gBaseStats = new GridPane();
+		gBaseStats.setHgap(10);
+		gBaseStats.setVgap(5);
+		gBaseStats.addColumn(0, new Label("Strength:"), new Label("Dexterity:"), new Label("Constitution:"),
+				new Label("Intelligence:"), new Label("Wisdom:"), new Label("Charisma:"));
+		TextField tfStr = new TextField("0");
+		TextField tfDex = new TextField("0");
+		TextField tfCon = new TextField("0");
+		TextField tfInt = new TextField("0");
+		TextField tfWis = new TextField("0");
+		TextField tfCha = new TextField("0");
+		gBaseStats.addColumn(1, tfStr, tfDex, tfCon, tfInt, tfWis, tfCha);
+
+		HBox hbChoices = new HBox(10, cbOccupation, gBaseStats);
+		hbChoices.setAlignment(Pos.CENTER);
+		hbChoices.setPadding(new Insets(20));
+
+		Button btClear = new Button("Clear All");
+		Button btSave = new Button("Save Sheet");
+		HBox hbButtons = new HBox(20, btClear, btSave);
+		hbButtons.setAlignment(Pos.BASELINE_CENTER);
+		hbButtons.setPadding(new Insets(20));
+		/**/
+		Pane pane = new Pane(hbNames, vbGender);//vbPersDetails, hbChoices, hbButtons);
+
+		Scene scene = new Scene(pane);
+		primaryStage.setTitle("Stat20: Level 0 Character Creator--Dungeon Crawl Classic"); 		// Set title
+	    primaryStage.setScene(scene); 								// Place the scene in the stage
+	    primaryStage.show();
+
+	    //btClear.setOnAction(e -> clearAll(primaryStage));
+		//btSave.setOnAction(e -> saveSheet(primaryStage));
+	}
+	private void clearAll(Stage prevStage){
+
+	}
+	private void saveSheet(Stage prevStage){
+
+	}
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
